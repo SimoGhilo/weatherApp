@@ -3,13 +3,15 @@ import ukMap from './resources/uk.svg';
 
 function Map() {
   const cities = [
-    { name: "London", top: "78%", left: "75%", id: "london" },
-    { name: "Birmingham", top: "65%", left: "60%", id: "birmingham" },
-    { name: "Manchester", top: "52%", left: "58%", id: "manchester" },
-    { name: "Newcastle", top: "38%", left: "65%", id: "newcastle" },
-    { name: "Edinburgh", top: "22%", left: "50%", id: "edinburgh" },
-    { name: "Belfast", top: "40%", left: "25%", id: "belfast" },
+    { name: "London", top: "82%", left: "57.5%", id: "london" },
+    { name: "Birmingham", top: "72%", left: "56%", id: "birmingham" },
+    { name: "Manchester", top: "58.5%", left: "55.5%", id: "manchester" },
+    { name: "Edinburgh", top: "42%", left: "54%", id: "edinburgh" },
+    { name: "Belfast", top: "56%", left: "48%", id: "belfast" },
   ];
+
+  //TODO: Detect viewport size and adjust map accordingly, maybe with a custom hook? Or just use media queries to hide the map on smaller screens and show a summary instead?
+  //TODO: Media queries for image
 
   return (
 
