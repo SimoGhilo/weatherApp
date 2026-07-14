@@ -8,6 +8,9 @@ import ukCityData from "./coords.ts";
 //types
 import type { City } from "./types.js";
 
+//Media
+import searchicon from './resources/magnifying-glasss.png';
+
 function Search() {
 
   //States
@@ -24,6 +27,8 @@ function Search() {
     }, [city]);
 
     //TODO: fix right header white gap.
+    //TODO: Search button should be functional and redirect to page for the actual search term (city)
+
 
   //Handlers
   function searchCity(city: string): void {
@@ -45,8 +50,8 @@ function Search() {
                 />
             </div>
             <div className="col-span-3 bg-amber-500 border-8 rounded-full border-blue-500">
-                <button className="w-full p-2 text-white text-sm md:text-1xl lg:text-1xl border-2 rounded-full border-black hover:bg-blue-700 transition-colors duration-300 cursor-pointer">
-                  Search
+                <button /*onClick={() => searchCity(city)} onFocus={() => setTogglePreview(true)}*/ className="w-full p-2 text-white text-sm md:text-1xl lg:text-1xl border-2 rounded-full border-black hover:bg-blue-700 transition-colors duration-300 cursor-pointer flex justify-center items-center">
+                  <img src={searchicon} alt="Search" className="max-h-5" />
                 </button>
             </div>
         </div>
@@ -55,14 +60,19 @@ function Search() {
             <div className="grid grid-cols-12 gap-8">
               <div className= "col-span-3 *:text-white text-sm md:text-1xl lg:text-2xl p-6 rounded"><h1>Search weather in...</h1></div>
               <div className= "col-span-9 text-white text-sm  p-6 rounded">
+                {/** If results */}
                 {(city.length > 0) && (
                   <ul>
-                    {cityData.map((c: City) => (
+                    {cityData.slice(0,5).map((c: City) => (
                       <li key={c?.id} className="cursor-pointer transition-colors hover:bg-blue-700 duration-300 p-2 rounded" >
-                        <a className="block w-full h-full" href={`/view/${c?.id}`}>{c?.name}</a>
+                        <a className="block w-full h-full" href={`/view/${c?.id}`}><p className="text-white text-base md:text-1xl lg:text-1xl">{c?.name}</p></a>
                       </li>
                     ))}
                   </ul>
+                )}
+                {/** If no results */}
+                {(city.length > 0) && cityData.length === 0 && (
+                  <p className="text-white text-xl md:text-1xl lg:text-1xl">We couldn't find any results for "{city}".</p>
                 )}
               </div>
             </div>
