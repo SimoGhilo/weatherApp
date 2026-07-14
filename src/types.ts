@@ -6,3 +6,7 @@
     lon: number;
   } | undefined;
 
+
+  export type RouteParam = {
+    city: string;
+  }

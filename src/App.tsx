@@ -1,10 +1,11 @@
 //Dependencies
-import { useState } from 'react';
+import { Routes, Route } from 'react-router-dom';
 //Components
 import Header from './Header';
 import Search from './Search';
 import Map from './Map';
 import Footer from './Footer';
+import View from './View';
 
 
 function App() {
@@ -15,7 +16,10 @@ function App() {
       <div className='flex flex-col grow'>
         <Header />
         <Search />
-        <Map />
+        <Routes>
+          <Route path="/" element={<Map />} />
+          <Route path="/view/:city" element={<View />} />
+        </Routes>
       </div>
 
       <Footer />
