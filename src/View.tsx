@@ -11,6 +11,9 @@ import ukCityData from "./coords.ts";
 //Map of weather codes to UI elements
 import { weatherMap } from "./weatherUI.ts";
 
+//Components
+import DailyForecast from "./DailyForecast.tsx";
+
 //Styles
 const activeCardStyle = "bg-slate-600 text-white border-slate-600 shadow-2xl scale-110 transition-transform duration-300";
 
@@ -23,7 +26,7 @@ function View() {
     //State
     const [chosenCity, setChosenCity] = useState<City | undefined>(undefined);
     const [weatherData, setWeatherData] = useState<WeatherData | undefined>(undefined);
-    const [activeCardIndex, setActiveCardIndex] = useState<number | null>(0);
+    const [activeCardIndex, setActiveCardIndex] = useState<number>(0);
 
     //Hooks
     useEffect(() => {
@@ -74,7 +77,8 @@ function View() {
     }
 
     //TODO: Use carousel for cards / grid ?
-    //TODO: link to cards to more detailed view of the day (hourly forecast, etc.)
+    //TODO: link to cards to more detailed view of the day (hourly forecast, etc.), DailyForecastComponent.tsx
+    //TODO: add index 3
 
     return (
         <>
@@ -138,6 +142,7 @@ function View() {
                     </div>
                 )}
             </div>
+            <DailyForecast lat={chosenCity?.lat} long={chosenCity?.lon} day={weatherData?.time?.[activeCardIndex]} />
         </>
     )
 }

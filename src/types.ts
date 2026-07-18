@@ -23,3 +23,9 @@
     label: string;
     icon: string;
   }
+
+  export type HourlyForecast = { 
+    time: string [];
+    temperature_2m: number [];
+    weather_code: number [];
+  }
