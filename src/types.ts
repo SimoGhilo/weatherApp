@@ -18,3 +18,8 @@
     temperature_2m_min: number [];
     precipitation_sum: number [];
   }
+
+  export type WeatherUI = { 
+    label: string;
+    icon: string;
+  }
