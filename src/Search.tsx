@@ -26,8 +26,6 @@ function Search() {
         }
     }, [city]);
 
-    //TODO: fix right header white gap.
-    //TODO: Search button should be functional and redirect to page for the actual search term (city)
 
 
   //Handlers

@@ -77,13 +77,14 @@ function View() {
     }
 
     //TODO: Use carousel for cards / grid ?
-    //TODO: link to cards to more detailed view of the day (hourly forecast, etc.), DailyForecastComponent.tsx
+    //TODO: City links clickable to redirect to that city page.
     //TODO: add index 3
+    //TODO: Sort out search button
 
     return (
         <>
-            <div className="flex flex-row items-start justify-start ms-10 mt-5">
-                <h1 className="sm:text-sm lg:text-4xl font-bold">{capitaliseFirstLetter(city || 'We could not find the city.')}</h1>
+            <div className="flex flex-row items-start justify-startmt-5">
+                <h1 className="sm:text-sm lg:text-4xl font-bold ms-10">{capitaliseFirstLetter(city || 'We could not find the city.')}</h1>
             </div>
             <div>
                 {weatherData && (
