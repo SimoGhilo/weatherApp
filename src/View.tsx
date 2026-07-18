@@ -47,6 +47,17 @@ function View() {
         return weatherMap[code] ?? { label: "Unknown", icon: "❓", color: "bg-gray-500" }
     }
 
+    function getTemperatureRangeClass(min: number, max: number): string {
+        const average = (min + max) / 2;
+        if (average < 5) return "border-t-blue-500";
+        if (average < 10) return "border-t-blue-300";
+        if (average < 15) return "border-t-yellow-300";
+        if (average < 20) return "border-t-yellow-500";
+        if (average < 25) return "border-t-red-400";
+        return "border-t-red-600";
+
+    }
+
 
     //UI
 
@@ -69,42 +80,55 @@ function View() {
             </div>
             <div>
                 {weatherData && (
-                    <div className="container">
-                        <div className="flex flex-row items-center justify-center p-4 flex-wrap gap-2">
+                    <div className="container ms-auto me-auto mt-1">
+                        <div className="flex flex-col md:flex-row flex-wrap items-center justify-center p-4 gap-2">
 
-                            <div className={`mx-2 border-2 border-t-5 border-gray-300 rounded-lg p-4 flex flex-col items-center justify-center`}>
+                            <div className={`mx-2 flex-1 min-w-[200px] max-w-[400px] md:max-w-[100px] border-2 border-t-5 ${getTemperatureRangeClass(weatherData?.temperature_2m_min[0], weatherData?.temperature_2m_max[0])} border-gray-300 rounded-lg p-4 flex flex-col items-center justify-center shadow-md`}>
                                 <h2 className="sm:text-sm lg:text-2xl font-bold">Today</h2>
                                 <span className="text-4xl">{getWeatherConfig(weatherData?.weather_code[0])?.icon}</span>
+                                <span>{weatherData?.temperature_2m_min[0]}°C - {weatherData?.temperature_2m_max[0]}°C</span>
+                                <div className="border-t border-gray-300 my-4 w-full"></div>
+                                <span>{getWeatherConfig(weatherData?.weather_code[0])?.label}</span>
                             </div>
 
-                            <div className={`mx-2 border-2 border-t-5  border-gray-300 rounded-lg p-4 flex flex-col items-center justify-center`}>
+                            <div className={`mx-2 flex-1 min-w-[200px] max-w-[400px] md:max-w-[100px] border-2 border-t-5 ${getTemperatureRangeClass(weatherData?.temperature_2m_min[1], weatherData?.temperature_2m_max[1])} border-gray-300 rounded-lg p-4 flex flex-col items-center justify-center shadow-md`}>
                                 <h2 className="sm:text-sm lg:text-2xl font-bold">Tomorrow</h2>
                                 <span className="text-4xl">{getWeatherConfig(weatherData?.weather_code[1])?.icon}</span>
+                                <span>{weatherData?.temperature_2m_min[1]}°C - {weatherData?.temperature_2m_max[1]}°C</span>
+                                <div className="border-t border-gray-300 my-4 w-full"></div>
+                                <span>{getWeatherConfig(weatherData?.weather_code[1])?.label}</span>
                             </div>
 
-                            <div className={`mx-2 border-2 border-t-5  border-gray-300 rounded-lg p-4 flex flex-col items-center justify-center`}>
+                            <div className={`mx-2 flex-1 min-w-[200px] max-w-[400px] md:max-w-[100px] border-2 border-t-5 ${getTemperatureRangeClass(weatherData?.temperature_2m_min[2], weatherData?.temperature_2m_max[2])} border-gray-300 rounded-lg p-4 flex flex-col items-center justify-center shadow-md`}>
                                 <h2 className="sm:text-sm lg:text-2xl font-bold">{weatherData?.time?.[2].slice(5,).split('-').reverse().join('-')}</h2>
                                 <span className="text-4xl">{getWeatherConfig(weatherData?.weather_code[2])?.icon}</span>
+                                <span>{weatherData?.temperature_2m_min[2]}°C - {weatherData?.temperature_2m_max[2]}°C</span>
+                                <div className="border-t border-gray-300 my-4 w-full"></div>
+                                <span>{getWeatherConfig(weatherData?.weather_code[2])?.label}</span>
                             </div>
 
-                            <div className={`mx-2 border-2 border-t-5  border-gray-300 rounded-lg p-4 flex flex-col items-center justify-center`}>
-                                <h2 className="sm:text-sm lg:text-2xl font-bold">{weatherData?.time?.[3].slice(5,).split('-').reverse().join('-')}</h2>
-                                <span className="text-4xl">{getWeatherConfig(weatherData?.weather_code[3])?.icon}</span>
-                            </div>
-
-                            <div className={`mx-2 border-2 border-t-5  border-gray-300 rounded-lg p-4 flex flex-col items-center justify-center`}>
+                            <div className={`mx-2 flex-1 min-w-[200px] max-w-[400px] md:max-w-[100px] border-2 border-t-5 ${getTemperatureRangeClass(weatherData?.temperature_2m_min[4], weatherData?.temperature_2m_max[4])} border-gray-300 rounded-lg p-4 flex flex-col items-center justify-center shadow-md`}>
                                 <h2 className="sm:text-sm lg:text-2xl font-bold">{weatherData?.time?.[4].slice(5,).split('-').reverse().join('-')}</h2>
                                 <span className="text-4xl">{getWeatherConfig(weatherData?.weather_code[4])?.icon}</span>
+                                <span>{weatherData?.temperature_2m_min[4]}°C - {weatherData?.temperature_2m_max[4]}°C</span>
+                                <div className="border-t border-gray-300 my-4 w-full"></div>
+                                <span>{getWeatherConfig(weatherData?.weather_code[4])?.label}</span>
                             </div>
 
-                            <div className={`mx-2 border-2 border-t-5  border-gray-300 rounded-lg p-4 flex flex-col items-center justify-center`}>
+                            <div className={`mx-2 flex-1 min-w-[200px] max-w-[400px] md:max-w-[100px] border-2 border-t-5 ${getTemperatureRangeClass(weatherData?.temperature_2m_min[5], weatherData?.temperature_2m_max[5])} border-gray-300 rounded-lg p-4 flex flex-col items-center justify-center shadow-md`}>
                                 <h2 className="sm:text-sm lg:text-2xl font-bold">{weatherData?.time?.[5].slice(5,).split('-').reverse().join('-')}</h2>
                                 <span className="text-4xl">{getWeatherConfig(weatherData?.weather_code[5])?.icon}</span>
+                                <span>{weatherData?.temperature_2m_min[5]}°C - {weatherData?.temperature_2m_max[5]}°C</span>
+                                <div className="border-t border-gray-300 my-4 w-full"></div>
+                                <span>{getWeatherConfig(weatherData?.weather_code[5])?.label}</span>
                             </div>
 
-                            <div className={`mx-2 border-2 border-t-5  border-gray-300 rounded-lg p-4 flex flex-col items-center justify-center`}>
+                            <div className={`mx-2 flex-1 min-w-[200px] max-w-[400px] md:max-w-[100px] border-2 border-t-5 ${getTemperatureRangeClass(weatherData?.temperature_2m_min[6], weatherData?.temperature_2m_max[6])} border-gray-300 rounded-lg p-4 flex flex-col items-center justify-center shadow-md`}>
                                 <h2 className="sm:text-sm lg:text-2xl font-bold">{weatherData?.time?.[6].slice(5,).split('-').reverse().join('-')}</h2>
                                 <span className="text-4xl">{getWeatherConfig(weatherData?.weather_code[6])?.icon}</span>
+                                <span>{weatherData?.temperature_2m_min[6]}°C - {weatherData?.temperature_2m_max[6]}°C</span>
+                                <div className="border-t border-gray-300 my-4 w-full"></div>
+                                <span>{getWeatherConfig(weatherData?.weather_code[6])?.label}</span>
                             </div>
 
                         </div>
