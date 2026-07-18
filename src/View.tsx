@@ -11,6 +11,9 @@ import ukCityData from "./coords.ts";
 //Map of weather codes to UI elements
 import { weatherMap } from "./weatherUI.ts";
 
+//Styles
+const activeCardStyle = "bg-slate-600 text-white border-slate-600 shadow-2xl scale-110 transition-transform duration-300";
+
 
 function View() {
 
@@ -20,6 +23,7 @@ function View() {
     //State
     const [chosenCity, setChosenCity] = useState<City | undefined>(undefined);
     const [weatherData, setWeatherData] = useState<WeatherData | undefined>(undefined);
+    const [activeCardIndex, setActiveCardIndex] = useState<number | null>(0);
 
     //Hooks
     useEffect(() => {
@@ -55,7 +59,6 @@ function View() {
         if (average < 20) return "border-t-yellow-500";
         if (average < 25) return "border-t-red-400";
         return "border-t-red-600";
-
     }
 
 
@@ -70,8 +73,8 @@ function View() {
         )
     }
 
-
-    console.log(weatherData, 'data from api');
+    //TODO: Use carousel for cards / grid ?
+    //TODO: link to cards to more detailed view of the day (hourly forecast, etc.)
 
     return (
         <>
@@ -83,7 +86,7 @@ function View() {
                     <div className="container ms-auto me-auto mt-1">
                         <div className="flex flex-col md:flex-row flex-wrap items-center justify-center p-4 gap-2">
 
-                            <div className={`mx-2 flex-1 min-w-[200px] max-w-[400px] md:max-w-[100px] border-2 border-t-5 ${getTemperatureRangeClass(weatherData?.temperature_2m_min[0], weatherData?.temperature_2m_max[0])} border-gray-300 rounded-lg p-4 flex flex-col items-center justify-center shadow-md`}>
+                            <div className={`mx-2 flex-1 min-w-[200px] max-w-[400px] md:max-w-[100px] border-2 border-t-5 ${getTemperatureRangeClass(weatherData?.temperature_2m_min[0], weatherData?.temperature_2m_max[0])} border-gray-300 rounded-lg p-4 flex flex-col items-center justify-center shadow-md ${activeCardIndex === 0 ? activeCardStyle : ''} hover:cursor-pointer`} onClick={() => setActiveCardIndex(0)}>
                                 <h2 className="sm:text-sm lg:text-2xl font-bold">Today</h2>
                                 <span className="text-4xl">{getWeatherConfig(weatherData?.weather_code[0])?.icon}</span>
                                 <span>{weatherData?.temperature_2m_min[0]}°C - {weatherData?.temperature_2m_max[0]}°C</span>
@@ -91,7 +94,7 @@ function View() {
                                 <span>{getWeatherConfig(weatherData?.weather_code[0])?.label}</span>
                             </div>
 
-                            <div className={`mx-2 flex-1 min-w-[200px] max-w-[400px] md:max-w-[100px] border-2 border-t-5 ${getTemperatureRangeClass(weatherData?.temperature_2m_min[1], weatherData?.temperature_2m_max[1])} border-gray-300 rounded-lg p-4 flex flex-col items-center justify-center shadow-md`}>
+                            <div className={`mx-2 flex-1 min-w-[200px] max-w-[400px] md:max-w-[100px] border-2 border-t-5 ${getTemperatureRangeClass(weatherData?.temperature_2m_min[1], weatherData?.temperature_2m_max[1])} border-gray-300 rounded-lg p-4 flex flex-col items-center justify-center shadow-md ${activeCardIndex === 1 ? activeCardStyle : ''} hover:cursor-pointer`} onClick={() => setActiveCardIndex(1)}>
                                 <h2 className="sm:text-sm lg:text-2xl font-bold">Tomorrow</h2>
                                 <span className="text-4xl">{getWeatherConfig(weatherData?.weather_code[1])?.icon}</span>
                                 <span>{weatherData?.temperature_2m_min[1]}°C - {weatherData?.temperature_2m_max[1]}°C</span>
@@ -99,7 +102,7 @@ function View() {
                                 <span>{getWeatherConfig(weatherData?.weather_code[1])?.label}</span>
                             </div>
 
-                            <div className={`mx-2 flex-1 min-w-[200px] max-w-[400px] md:max-w-[100px] border-2 border-t-5 ${getTemperatureRangeClass(weatherData?.temperature_2m_min[2], weatherData?.temperature_2m_max[2])} border-gray-300 rounded-lg p-4 flex flex-col items-center justify-center shadow-md`}>
+                            <div className={`mx-2 flex-1 min-w-[200px] max-w-[400px] md:max-w-[100px] border-2 border-t-5 ${getTemperatureRangeClass(weatherData?.temperature_2m_min[2], weatherData?.temperature_2m_max[2])} border-gray-300 rounded-lg p-4 flex flex-col items-center justify-center shadow-md ${activeCardIndex === 2 ? activeCardStyle : ''} hover:cursor-pointer`} onClick={() => setActiveCardIndex(2)}>
                                 <h2 className="sm:text-sm lg:text-2xl font-bold">{weatherData?.time?.[2].slice(5,).split('-').reverse().join('-')}</h2>
                                 <span className="text-4xl">{getWeatherConfig(weatherData?.weather_code[2])?.icon}</span>
                                 <span>{weatherData?.temperature_2m_min[2]}°C - {weatherData?.temperature_2m_max[2]}°C</span>
@@ -107,7 +110,7 @@ function View() {
                                 <span>{getWeatherConfig(weatherData?.weather_code[2])?.label}</span>
                             </div>
 
-                            <div className={`mx-2 flex-1 min-w-[200px] max-w-[400px] md:max-w-[100px] border-2 border-t-5 ${getTemperatureRangeClass(weatherData?.temperature_2m_min[4], weatherData?.temperature_2m_max[4])} border-gray-300 rounded-lg p-4 flex flex-col items-center justify-center shadow-md`}>
+                            <div className={`mx-2 flex-1 min-w-[200px] max-w-[400px] md:max-w-[100px] border-2 border-t-5 ${getTemperatureRangeClass(weatherData?.temperature_2m_min[4], weatherData?.temperature_2m_max[4])} border-gray-300 rounded-lg p-4 flex flex-col items-center justify-center shadow-md ${activeCardIndex === 4 ? activeCardStyle : ''} hover:cursor-pointer`} onClick={() => setActiveCardIndex(4)}>
                                 <h2 className="sm:text-sm lg:text-2xl font-bold">{weatherData?.time?.[4].slice(5,).split('-').reverse().join('-')}</h2>
                                 <span className="text-4xl">{getWeatherConfig(weatherData?.weather_code[4])?.icon}</span>
                                 <span>{weatherData?.temperature_2m_min[4]}°C - {weatherData?.temperature_2m_max[4]}°C</span>
@@ -115,7 +118,7 @@ function View() {
                                 <span>{getWeatherConfig(weatherData?.weather_code[4])?.label}</span>
                             </div>
 
-                            <div className={`mx-2 flex-1 min-w-[200px] max-w-[400px] md:max-w-[100px] border-2 border-t-5 ${getTemperatureRangeClass(weatherData?.temperature_2m_min[5], weatherData?.temperature_2m_max[5])} border-gray-300 rounded-lg p-4 flex flex-col items-center justify-center shadow-md`}>
+                            <div className={`mx-2 flex-1 min-w-[200px] max-w-[400px] md:max-w-[100px] border-2 border-t-5 ${getTemperatureRangeClass(weatherData?.temperature_2m_min[5], weatherData?.temperature_2m_max[5])} border-gray-300 rounded-lg p-4 flex flex-col items-center justify-center shadow-md ${activeCardIndex === 5 ? activeCardStyle : ''} hover:cursor-pointer`} onClick={() => setActiveCardIndex(5)}>
                                 <h2 className="sm:text-sm lg:text-2xl font-bold">{weatherData?.time?.[5].slice(5,).split('-').reverse().join('-')}</h2>
                                 <span className="text-4xl">{getWeatherConfig(weatherData?.weather_code[5])?.icon}</span>
                                 <span>{weatherData?.temperature_2m_min[5]}°C - {weatherData?.temperature_2m_max[5]}°C</span>
@@ -123,7 +126,7 @@ function View() {
                                 <span>{getWeatherConfig(weatherData?.weather_code[5])?.label}</span>
                             </div>
 
-                            <div className={`mx-2 flex-1 min-w-[200px] max-w-[400px] md:max-w-[100px] border-2 border-t-5 ${getTemperatureRangeClass(weatherData?.temperature_2m_min[6], weatherData?.temperature_2m_max[6])} border-gray-300 rounded-lg p-4 flex flex-col items-center justify-center shadow-md`}>
+                            <div className={`mx-2 flex-1 min-w-[200px] max-w-[400px] md:max-w-[100px] border-2 border-t-5 ${getTemperatureRangeClass(weatherData?.temperature_2m_min[6], weatherData?.temperature_2m_max[6])} border-gray-300 rounded-lg p-4 flex flex-col items-center justify-center shadow-md ${activeCardIndex === 6 ? activeCardStyle : ''} hover:cursor-pointer`} onClick={() => setActiveCardIndex(6)}>
                                 <h2 className="sm:text-sm lg:text-2xl font-bold">{weatherData?.time?.[6].slice(5,).split('-').reverse().join('-')}</h2>
                                 <span className="text-4xl">{getWeatherConfig(weatherData?.weather_code[6])?.icon}</span>
                                 <span>{weatherData?.temperature_2m_min[6]}°C - {weatherData?.temperature_2m_max[6]}°C</span>
