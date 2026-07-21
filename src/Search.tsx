@@ -1,6 +1,7 @@
 
 //Dependencies
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 //Imports 
 import ukCityData from "./coords.ts";
@@ -11,7 +12,11 @@ import type { City } from "./types.js";
 //Media
 import searchicon from './resources/magnifying-glasss.png';
 
+
 function Search() {
+
+  //navigator
+  const navigate = useNavigate();
 
   //States
   const[city, setCity] = useState<string>("");
@@ -30,7 +35,7 @@ function Search() {
 
   //Handlers
   function searchCity(city: string): void {
-    if((/^[a-zA-Z\s]+$/).test(city)) {
+    if (city === "" || /^[a-zA-Z\s]+$/.test(city)) {
         setCity(city.toLowerCase());
     }
   }
@@ -69,7 +74,7 @@ return (
                   <li key={c?.id}>
                     <a
                       className="block px-4 py-3 text-white text-sm md:text-base hover:bg-white/10 rounded-xl transition-colors"
-                      href={`/view/${c?.id}`}
+                      onClick={() => navigate(`/view/${c?.id}`)}
                     >
                       📍 {c?.name}
                     </a>
