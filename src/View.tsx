@@ -78,9 +78,7 @@ function View() {
             </div>
         )
     }
-
-    //TODO: Use carousel for cards / grid ?
-    //TODO: Sort out search button
+    //TODO: cards wind , humidity, and precipitation at the bottom
 
     return (
         <>
