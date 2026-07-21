@@ -29,3 +29,9 @@
     temperature_2m: number [];
     weather_code: number [];
   }
+
+  export type Metrics = {
+    wind_speed_10m_max: number [];
+    precipitation_probability_max: number [];
+    precipitation_sum: number [];
+  }

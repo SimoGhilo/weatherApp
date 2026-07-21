@@ -67,7 +67,7 @@ function DailyForecast({lat, long, day}: {lat: number | undefined, long: number 
                     {hourlyForecast && hourlyForecast.time.map((time, index) => (
                         <div key={index} ref={time.slice(11,13) === timec && time.slice(8,10) === today ? activeCardRef : null} className={`flex flex-col items-center justify-center p-4 border border-gray-300 rounded-lg ${(time.slice(11,13) === timec && time.slice(8,10) === today) ? activeCardStyle : 'bg-white'}`}>
                             <span className="text-sm">{time.slice(11,16)}</span>
-                            <span className="text-sm">{getWeatherConfig(hourlyForecast.weather_code[index])?.icon}</span>
+                            <span className="text-xl">{getWeatherConfig(hourlyForecast.weather_code[index])?.icon}</span>
                             <span className="text-sm">{hourlyForecast.temperature_2m[index]}°C</span>
                         </div>
                     ))}

@@ -13,6 +13,7 @@ import { weatherMap } from "./weatherUI.ts";
 
 //Components
 import DailyForecast from "./DailyForecast.tsx";
+import Stats from "./Stats.tsx";
 
 //Styles
 const activeCardStyle = "bg-slate-600 text-white border-slate-600 shadow-2xl scale-110 transition-transform duration-300";
@@ -78,7 +79,6 @@ function View() {
             </div>
         )
     }
-    //TODO: cards wind , humidity, and precipitation at the bottom
 
     return (
         <>
@@ -159,6 +159,7 @@ function View() {
                 )}
             </div>
             <DailyForecast lat={chosenCity?.lat} long={chosenCity?.lon} day={weatherData?.time?.[activeCardIndex]} />
+            <Stats lat={chosenCity?.lat} long={chosenCity?.lon} day={weatherData?.time?.[activeCardIndex]} />
         </>
     )
 }
