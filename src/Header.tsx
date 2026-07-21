@@ -3,14 +3,18 @@
 
 
 function Header() {
-    return (
-    <div className="w-screen bg-blue-500 p-4">
-      <div className="flex flex-row items-center justify-center">
-        <h1 className="text-1xl md:text-2xl lg:text-4xl font-bold text-white">Weather App</h1>
-        <span className="text-1xl md:text-2xl lg:text-4xl">☀️</span>
+return (
+    <header className="w-full bg-blue-600 shadow-md py-4 px-6">
+      <div className="max-w-6xl mx-auto flex items-center justify-between">
+        <div className="flex items-center gap-2">
+          <span className="text-3xl">☀️</span>
+          <h1 className="text-xl md:text-2xl font-bold text-white tracking-wide">
+            Weather App
+          </h1>
+        </div>
       </div>
-    </div>
-    )
+    </header>
+  );
 }
 
 export default Header;

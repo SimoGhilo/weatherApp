@@ -1,13 +1,13 @@
-import React from 'react'
-
 function Footer() {
-  return (
-    <div className="w-screen bg-blue-500 p-4">
-      <div className="flex flex-row items-center justify-center">
-        <p className="text-sm md:text-base lg:text-lg text-white">© 2026 Weather App</p>
+return (
+    <footer className="w-full bg-blue-700 py-6 border-t border-white/10">
+      <div className="max-w-6xl mx-auto flex items-center justify-center">
+        <p className="text-xs md:text-sm text-blue-100 font-medium">
+          © 2026 Weather App. Powered by Open-Meteo.
+        </p>
       </div>
-    </div>
-  )
+    </footer>
+  );
 }
 
 export default Footer
