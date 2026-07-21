@@ -1,5 +1,5 @@
 //Dependencies
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 //Types
@@ -22,6 +22,9 @@ function View() {
 
     //URL params
     const { city } = useParams<RouteParam>();
+
+    //Navigation
+    const navigate = useNavigate();
 
     //State
     const [chosenCity, setChosenCity] = useState<City | undefined>(undefined);
@@ -77,14 +80,20 @@ function View() {
     }
 
     //TODO: Use carousel for cards / grid ?
-    //TODO: City links clickable to redirect to that city page.
-    //TODO: add index 3
     //TODO: Sort out search button
 
     return (
         <>
-            <div className="flex flex-row items-start justify-startmt-5">
+            <div className="flex flex-row items-center justify-start mt-5">
                 <h1 className="sm:text-sm lg:text-4xl font-bold ms-10">{capitaliseFirstLetter(city || 'We could not find the city.')}</h1>
+                <button className="m bg-white text-slate-900 font-bold whitespace-nowrap
+                         text-[9px] xs:text-xs sm:text-sm 
+                         px-1 py-0.5 xs:px-2 xs:py-1 rounded-md shadow-md 
+                         hover:bg-amber-400 cursor-pointer
+                         transition-all duration-200 focus:outline-none ms-auto me-3" 
+                         onClick={() => navigate('/')}>
+                    &lt; Back to Map
+                </button>
             </div>
             <div>
                 {weatherData && (
@@ -113,6 +122,14 @@ function View() {
                                 <span>{weatherData?.temperature_2m_min[2]}°C - {weatherData?.temperature_2m_max[2]}°C</span>
                                 <div className="border-t border-gray-300 my-4 w-full"></div>
                                 <span>{getWeatherConfig(weatherData?.weather_code[2])?.label}</span>
+                            </div>
+
+                            <div className={`mx-2 flex-1 min-w-[200px] max-w-[400px] md:max-w-[100px] border-2 border-t-5 ${getTemperatureRangeClass(weatherData?.temperature_2m_min[3], weatherData?.temperature_2m_max[3])} border-gray-300 rounded-lg p-4 flex flex-col items-center justify-center shadow-md ${activeCardIndex === 3 ? activeCardStyle : ''} hover:cursor-pointer`} onClick={() => setActiveCardIndex(3)}>
+                                <h2 className="sm:text-sm lg:text-2xl font-bold">{weatherData?.time?.[3].slice(5,).split('-').reverse().join('-')}</h2>
+                                <span className="text-4xl">{getWeatherConfig(weatherData?.weather_code[3])?.icon}</span>
+                                <span>{weatherData?.temperature_2m_min[3]}°C - {weatherData?.temperature_2m_max[3]}°C</span>
+                                <div className="border-t border-gray-300 my-4 w-full"></div>
+                                <span>{getWeatherConfig(weatherData?.weather_code[3])?.label}</span>
                             </div>
 
                             <div className={`mx-2 flex-1 min-w-[200px] max-w-[400px] md:max-w-[100px] border-2 border-t-5 ${getTemperatureRangeClass(weatherData?.temperature_2m_min[4], weatherData?.temperature_2m_max[4])} border-gray-300 rounded-lg p-4 flex flex-col items-center justify-center shadow-md ${activeCardIndex === 4 ? activeCardStyle : ''} hover:cursor-pointer`} onClick={() => setActiveCardIndex(4)}>

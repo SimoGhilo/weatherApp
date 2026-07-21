@@ -1,6 +1,12 @@
+// Media imports
 import ukMap from './resources/uk.svg';
+//Dependencies
+import { useNavigate } from 'react-router-dom';
 
 function Map() {
+
+  const navigate = useNavigate();
+
   const cities = [
     { name: "London", top: "82%", left: "84.5%", id: "london" },
     { name: "Birmingham", top: "72%", left: "76%", id: "birmingham" },
@@ -26,6 +32,7 @@ function Map() {
 
           {cities.map((city) => (
             <button
+              onClick={() => navigate(`/view/${city.id}`)}
               key={city.id}
               style={{ top: city.top, left: city.left }}
               className="absolute transform -translate-x-1/2 -translate-y-1/2 
